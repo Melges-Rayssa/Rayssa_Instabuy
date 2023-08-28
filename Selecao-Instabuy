@@ -1,0 +1,23 @@
+import requests
+
+def upload_csv(api_url, api_key, csv_file_path):
+    headers = {
+        "Authorization": f"Bearer {api_key}"
+    }
+
+    with open(csv_file_path, 'rb') as csv_file:
+        files = {'file': (csv_file_path, csv_file)}
+
+        response = requests.post(api_url, headers=headers, files=files)
+
+        if response.status_code == 200:
+            return "Sucess"
+        else:
+            return f"Erro - Código de status: {response.status_code}"
+
+api_url = "https://api.instabuy.com.br/store/"
+api_key = "Mq1EWAXiHwraLIQgfq4stmUxKiM6VpC5Xd9o3wuX1Go"
+csv_file_path = "‪C:\\Users\\User\\OneDrive\\Área de Trabalho\\Rayssa\\items.csv"
+
+result = upload_csv(api_url, api_key, csv_file_path)
+print(result)
